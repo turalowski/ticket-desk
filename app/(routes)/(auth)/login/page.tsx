@@ -11,16 +11,28 @@ export default function Login() {
   const router = useRouter();
   const [error, setError] = useState<string>();
 
+  /**
+   * Handles the form submission for user sign-in.
+   *
+   * @param {string} email - The user's email address.
+   * @param {string} password - The user's password.
+   */
   async function handleSubmit(email: string, password: string) {
+    // Clear any previous error messages
     setError(null);
+    // Create a Supabase client instance
     const supabase = createClientComponentClient();
+    // Attempt to sign in the user using Supabase authentication
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+    // Check for errors during the sign-in process
     if (error) {
+      // If an error occurs, set the error message
       setError(error.message);
     } else {
+      // If sign-in is successful, navigate to the home page
       router.push('/');
     }
   }

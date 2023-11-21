@@ -7,21 +7,34 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Register() {
+  // STATES
   const router = useRouter();
   const [error, setError] = useState<string>();
+
+  /**
+   * Handles the form submission for user sign-up.
+   *
+   * @param {string} email - The user's email address.
+   * @param {string} password - The user's chosen password.
+   */
   async function handleSubmit(email: string, password: string) {
+    // Create a Supabase client instance
     const supabase = createClientComponentClient();
+    // Attempt to sign up the user using Supabase authentication
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
+        // Specify the email redirection URL after successful sign-up
         emailRedirectTo: `${location.origin}/api/auth/callback`,
       },
     });
-
+    // Check for errors during the sign-up process
     if (error) {
+      // If an error occurs, set the error message
       setError(error.message);
     } else {
+      // If sign-up is successful, navigate to the verification page
       router.push('/verify');
     }
   }
