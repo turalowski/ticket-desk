@@ -5,14 +5,32 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+} from '@/app/components/ui/card';
+import { Badge } from '@/app/components/ui/badge';
 import { Ticket } from '@/app/utils/types';
 
 enum PriorityColor {
   low = 'green',
   medium = 'blue',
   high = 'red',
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const id = params.id;
+  const response = await fetch(`http://localhost:5000/tickets/${id}`);
+  const ticket: Ticket = await response.json();
+  return {
+    title: `Helpdesk | ${ticket.title}`,
+  };
+}
+
+export async function generateStaticParams() {
+  const response = await fetch('http://localhost:5000/tickets');
+  const tickets = await response.json();
+
+  return tickets.map((ticket: Ticket) => ({
+    id: ticket.id,
+  }));
 }
 
 async function getTicket(id: string): Promise<Ticket> {

@@ -1,15 +1,17 @@
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { Session, User } from '@supabase/supabase-js';
+import LogoutButton from './logout-button';
 
 export function MainNav({
+  user,
   className,
   ...props
-}: React.HTMLAttributes<HTMLElement>) {
+}: React.HTMLAttributes<HTMLElement> & {
+  user: User;
+}) {
   return (
-    <nav
-      className={cn('flex items-center space-x-4 lg:space-x-6 p-6', className)}
-      {...props}
-    >
+    <nav className={cn('flex items-center gap-6 p-6', className)} {...props}>
       <Link
         href="/"
         className="text-sm font-medium transition-colors hover:text-primary"
@@ -18,10 +20,12 @@ export function MainNav({
       </Link>
       <Link
         href="/tickets"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary mr-auto"
       >
         Tickets
       </Link>
+      {user && <span>{user.email}</span>}
+      <LogoutButton />
     </nav>
   );
 }
