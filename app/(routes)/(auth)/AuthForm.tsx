@@ -52,7 +52,7 @@ export function AuthForm({
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter email of user" {...field} />
+                    <Input placeholder="name@example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -67,7 +67,7 @@ export function AuthForm({
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="I'm having trouble accessing my email account. It keeps showing an error message."
+                      placeholder="**********"
                       {...field}
                     />
                   </FormControl>

@@ -42,21 +42,27 @@ export function CreateForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
     const newTicket = {
       title: values.title,
       body: values.body,
       priority: values.priority,
-      user_email: 'thajiyev9@outlook.com',
     };
 
-    const response = await fetch('http://localhost:5000/tickets', {
+    const response = await fetch('api/tickets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTicket),
     });
 
-    if (response.status === 201) {
+    const json = await response.json();
+    console.log(json);
+
+    if (json.error) {
+      console.log(json.error);
+    }
+
+    if (json.data) {
+      router.refresh();
       router.push('/tickets');
     }
   }

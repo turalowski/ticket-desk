@@ -22,7 +22,7 @@ export function Ticket({ ticket }: { ticket: Ticket }) {
         </CardHeader>
         <CardContent>
           <CardDescription className="mb-3">
-            {ticket.body.split('.')[0]}
+            {ticket.body?.split('.')[0]}
           </CardDescription>
           <div className="flex items-center text-sm text-muted-foreground">
             <CircleIcon className="mr-1 h-3 w-3 fill-sky-400 text-sky-400" />

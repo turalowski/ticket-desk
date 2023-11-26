@@ -1,7 +1,3 @@
-export type Ticket = {
-  id: number;
-  title: string;
-  body: string;
-  priority: 'low' | 'medium' | 'high';
-  user_email: string;
-};
+import { Database } from '@/lib/database.types';
+
+export type Ticket = Database['public']['Tables']['tickets']['Row'];

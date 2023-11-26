@@ -40,11 +40,11 @@ export default function Register() {
   }
 
   return (
-    <nav className="h-full flex grow items-center flex-col justify-center">
+    <nav className="h-full flex grow items-center flex-col justify-center px-6 md:px-0">
       <h2 className="scroll-m-20  text-3xl font-semibold tracking-tight ">
         Register
       </h2>
-      <div className="w-full flex flex-col gap-6 md:w-1/2">
+      <div className="w-full flex flex-col gap-6 md:w-1/3">
         <AuthForm handleSubmit={handleSubmit} submitButtonLabel="Register" />
         {error && (
           <Alert variant="destructive">
